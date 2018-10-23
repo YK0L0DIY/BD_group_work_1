@@ -1,0 +1,43 @@
+CREATE DATABASE trab1
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    CONNECTION LIMIT = -1;
+
+create table Especie(
+	NomeE  varchar(20) Primary Key,
+  Classe varchar(20)
+);
+
+create table Animal(
+  NomeA	varchar(20) Primary Key,
+	Genero  varchar(20),
+	NomeE 	varchar(20) References Especie On delete Cascade
+);
+
+create table Compartimento(
+  IdComp  integer Primary Key,
+	Tipo varchar(20)
+);
+
+create table Tratador(
+  NCC  integer Primary Key,
+  NomeT varchar(20),
+	Salario integer,
+	NCCChefe integer
+);
+
+create table Alojado(
+  NomeA	varchar(20) References Animal on delete Cascade,
+  IdComp  integer References Compartimento on delete Cascade,
+	Primary Key(NomeA,IdComp)
+);
+
+create table Trata(
+  IdComp  integer References Compartimento on delete Cascade,
+  NCC integer References Tratador on delete Cascade,
+	Primary Key(IdComp,NCC)
+);
+
+
+////////////////////////inserir dados////////////////
