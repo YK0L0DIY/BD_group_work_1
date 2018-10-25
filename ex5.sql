@@ -41,3 +41,4 @@ where Tipo like 'Gaiola' or Tipo like 'Pantano'
 select count(classe) as Numero_de_animais_mamiferos
 from Especie
 where classe like 'Mamifero'
+
