@@ -32,6 +32,6 @@ from  Especie natural inner join compartimento natural inner join Alojado natura
 where classe like 'Reptil' 
 
 --f--
-select NomeT
+select distinct NomeT
 from Tratador natural inner join Compartimento
 where Tipo like 'Gaiola' or tipo like 'Pantano'
