@@ -42,3 +42,15 @@ select count(classe) as Numero_de_animais_mamiferos
 from Especie
 where classe like 'Mamifero'
 
+--h--
+select IdComp ,count(NomeA) as Numero_de_animais
+from Alojado
+group by IdComp
+
+--i--
+select NomeT , count(NomeA) as Mamiferos
+from Especie natural inner join Tratador natural inner join Trata natural inner join Animal natural inner join Alojado
+where Classe like 'Mamifero'
+Group by NomeT
+
+
