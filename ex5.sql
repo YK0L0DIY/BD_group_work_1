@@ -20,3 +20,18 @@ select idcomp
 from  Especie natural inner join compartimento natural inner join Alojado natural inner join Animal
 where classe like 'Ave'
 
+--e--
+select IdComp
+from  Especie natural inner join compartimento natural inner join Alojado natural inner join Animal
+where classe like 'Mamifero'
+
+INTERSECT
+
+select IdComp
+from  Especie natural inner join compartimento natural inner join Alojado natural inner join Animal
+where classe like 'Reptil' 
+
+--f--
+select NomeT
+from Tratador natural inner join Compartimento
+where Tipo like 'Gaiola' or tipo like 'Pantano'
