@@ -81,5 +81,5 @@ INSERT INTO Alojado Values ('Bela',15);
 
 --q--
 INSERT INTO Especie Values ('Arara','Ave');
-INSERT INTO Animal Values ('Joia','feminino','Papagaio');
+INSERT INTO Animal Values ('Joia','feminino','Arara');
 INSERT INTO Alojado Values ('Joia',15);

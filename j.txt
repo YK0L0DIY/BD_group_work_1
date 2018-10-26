@@ -1,0 +1,4 @@
+select NomeE
+from Especie
+where Especie.NomeE in (
+	)

@@ -53,4 +53,45 @@ from Especie natural inner join Tratador natural inner join Trata natural inner 
 where Classe like 'Mamifero'
 Group by NomeT
 
+--j--
+select t.NomeE
+from (
+	select NomeE , count(idComp)as conta
+	from (select  distinct NomeE, Idcomp 
+			from Especie natural inner join Alojado natural inner join Animal natural inner join Compartimento) as N
+	group by NomeE) as T 
+where conta = 4
+
+
+select distinct nomeE , idComp
+from compartimento,especie
+EXCEPT
+select  distinct NomeE, Idcomp 
+from Especie natural inner join Alojado natural inner join Animal natural inner join Compartimento
+--k--
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
