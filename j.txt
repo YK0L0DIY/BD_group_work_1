@@ -1,4 +1,7 @@
 select NomeE
-from Especie
-where Especie.NomeE in (
-	)
+from (select NomeE , count(idComp)as numCompartiemntos , (select count(tipo) from compartimento) as total
+	from (select  distinct NomeE, Idcomp 
+			from Especie natural inner join Alojado natural inner join Animal natural inner join Compartimento) as N
+	group by NomeE) as E
+where numCompartiemntos=total
+	

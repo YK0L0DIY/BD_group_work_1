@@ -54,22 +54,15 @@ where Classe like 'Mamifero'
 Group by NomeT
 
 --j--
-select t.NomeE
-from (
-	select NomeE , count(idComp)as conta
+select NomeE
+from (select NomeE , count(idComp)as numCompartiemntos , (select count(tipo) from compartimento) as total
 	from (select  distinct NomeE, Idcomp 
 			from Especie natural inner join Alojado natural inner join Animal natural inner join Compartimento) as N
-	group by NomeE) as T 
-where conta = 4
+	group by NomeE) as E
+where numCompartiemntos=total
+	
 
-
-select distinct nomeE , idComp
-from compartimento,especie
-EXCEPT
-select  distinct NomeE, Idcomp 
-from Especie natural inner join Alojado natural inner join Animal natural inner join Compartimento
-
---k--
+--k--rever
 select NomeT
 from Tratador natural inner join (select max(NomeT), NCCChefe
 from Tratador natural inner join Trata natural inner join Alojado natural inner join Animal natural inner join Especie
@@ -77,7 +70,7 @@ where Classe like 'Mamifero'
 group by NCCChefe) as N
 where NCC = N.NCCChefe
 
---l--
+--l--rever
 select IdComp
 from(
 select IdComp, count(Genero) as Count_femeas
