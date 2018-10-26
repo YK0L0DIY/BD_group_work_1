@@ -68,8 +68,23 @@ from compartimento,especie
 EXCEPT
 select  distinct NomeE, Idcomp 
 from Especie natural inner join Alojado natural inner join Animal natural inner join Compartimento
---k--
 
+--k--
+select NomeT
+from Tratador natural inner join (select max(NomeT), NCCChefe
+from Tratador natural inner join Trata natural inner join Alojado natural inner join Animal natural inner join Especie
+where Classe like 'Mamifero'
+group by NCCChefe) as N
+where NCC = N.NCCChefe
+
+--l--
+select IdComp
+from(
+select IdComp, count(Genero) as Count_femeas
+from Compartimento natural inner join Alojado natural inner join Animal
+where Genero like 'feminino'
+group by IdComp) as N
+where N.Count_femeas = 
 
 
 
