@@ -62,22 +62,34 @@ from (select NomeE , count(idComp)as numCompartiemntos , (select count(tipo) fro
 where numCompartiemntos=total
 	
 
---k--rever
+--k--
 select NomeT
-from Tratador natural inner join (select max(NomeT), NCCChefe
-from Tratador natural inner join Trata natural inner join Alojado natural inner join Animal natural inner join Especie
-where Classe like 'Mamifero'
-group by NCCChefe) as N
-where NCC = N.NCCChefe
+from Tratador
+where NCC = (select NCCChefe
+			from (select NomeT, NCCChefe
+			from Tratador natural inner join Trata natural inner join Alojado natural inner join Animal natural inner join Especie
+			where Classe like 'Mamifero'
+	  		group by NomeT, NCCchefe
+	 		having NCCChefe is not null) as N)
 
---l--rever
-select IdComp
-from(
+--l-- falta selecionar os que têm maior num de femeas
 select IdComp, count(Genero) as Count_femeas
-from Compartimento natural inner join Alojado natural inner join Animal
-where Genero like 'feminino'
-group by IdComp) as N
-where N.Count_femeas = 
+	from Compartimento natural inner join Alojado natural inner join Animal
+	where Genero like 'feminino'
+	group by IdComp
+	order by Count_femeas desc
+
+
+--ESTE N FUNCIONA PARA A L
+select IdComp, count(Genero) as B
+from Compartimento natural inner join Animal natural inner join Alojado
+where B =(
+		select max(Count_femeas)
+		from (select count(Genero) as Count_femeas
+			from Compartimento natural inner join Alojado natural inner join Animal
+			where Genero like 'feminino'
+			group by IdComp
+			order by Count_femeas desc) as N)
 
 
 
