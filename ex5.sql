@@ -96,7 +96,11 @@ from (	select * , (select max(count_femeas)
 where maximo=count_femeas
 
 
+--m--
+delete from especie where classe ilike 'reptil'
+
 --n--
+
 
 
 
