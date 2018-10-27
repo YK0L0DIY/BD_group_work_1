@@ -83,3 +83,9 @@ INSERT INTO Alojado Values ('Bela',15);
 INSERT INTO Especie Values ('Arara','Ave');
 INSERT INTO Animal Values ('Joia','feminino','Arara');
 INSERT INTO Alojado Values ('Joia',15);
+
+
+--Done by--
+--Yaroslav Kolodiy n39859--
+--Eduardo Farofias n39873--
+

@@ -100,7 +100,39 @@ where maximo=count_femeas
 delete from especie where classe ilike 'reptil'
 
 --n--
+select idcomp , count(classe) as numero_de_aves
+from(
+	select * 
+	from especie natural inner join animal natural inner join alojado natural inner join compartimento
+	where classe like 'Ave'
+	) as tab1 
+group by idcomp
 
+Union 
+
+select idcomp , 0
+from (
+	select idComp
+	from compartimento
+	Except
+	select idcomp 
+	from especie natural inner join animal natural inner join alojado natural inner join compartimento
+	where classe like 'Ave'
+	) as tab2 
+    
+--o--
+select sum(N.salario) + sum(tratador.salario)
+from (select distinct ncc, nccChefe , salario
+	from tratador natural inner join trata 
+	where idcomp = ( select idcomp
+					from Especie natural inner join Animal natural inner join Alojado natural inner join Compartimento 
+					where classe like 'Reptil' and tipo ilike 'Charco')
+	) as N , tratador
+where N.nccchefe = tratador.ncc
+
+--Done by--
+--Yaroslav Kolodiy n39859--
+--Eduardo Farofias n39873--
 
 
 

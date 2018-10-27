@@ -40,4 +40,6 @@ create table Trata(
 );
 
 
-////////////////////////inserir dados////////////////
+--Done by--
+--Yaroslav Kolodiy n39859--
+--Eduardo Farofias n39873--
