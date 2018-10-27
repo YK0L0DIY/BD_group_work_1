@@ -63,35 +63,40 @@ where numCompartiemntos=total
 	
 
 --k--
-select NomeT
-from Tratador
-where NCC = (select NCCChefe
-			from (select NomeT, NCCChefe
-			from Tratador natural inner join Trata natural inner join Alojado natural inner join Animal natural inner join Especie
-			where Classe like 'Mamifero'
-	  		group by NomeT, NCCchefe
-	 		having NCCChefe is not null) as N)
+select tratador.nomeT
+from (select * , (select max(numero_que_trata) from (select nomeT ,count(classe) as numero_que_trata, NCCChefe
+				from tratador natural inner join trata natural inner join compartimento natural inner join alojado natural inner join especie natural inner join Animal
+				where classe ilike 'mamifero' and nccchefe is not null
+				group by NCCchefe,nomeT
+				)as trat) as maximo
+		from(
+			select nomeT ,count(classe) as numero_que_trata, NCCChefe
+			from tratador natural inner join trata natural inner join compartimento natural inner join alojado natural inner join especie natural inner join Animal
+			where classe ilike 'mamifero' and nccchefe is not null
+			group by NCCchefe,nomeT
+		) as tratadores) as finaltab , tratador
+where numero_que_trata = maximo and finaltab.nccchefe = tratador.ncc
 
---l-- falta selecionar os que têm maior num de femeas
-select IdComp, count(Genero) as Count_femeas
-	from Compartimento natural inner join Alojado natural inner join Animal
-	where Genero like 'feminino'
-	group by IdComp
-	order by Count_femeas desc
+--l--
+select idcomp
+from (	select * , (select max(count_femeas)
+				from(
+						select IdComp, count(Genero) as Count_femeas
+						from Compartimento natural inner join Alojado natural inner join Animal
+						where Genero like 'feminino'
+						group by IdComp
+				) as maximo) as maximo
+	from (
+		select IdComp, count(Genero) as Count_femeas
+		from Compartimento natural inner join Alojado natural inner join Animal
+		where Genero like 'feminino'
+		group by IdComp
+	) as tab1
+	) as finaltab
+where maximo=count_femeas
 
 
---ESTE N FUNCIONA PARA A L
-select IdComp, count(Genero) as B
-from Compartimento natural inner join Animal natural inner join Alojado
-where B =(
-		select max(Count_femeas)
-		from (select count(Genero) as Count_femeas
-			from Compartimento natural inner join Alojado natural inner join Animal
-			where Genero like 'feminino'
-			group by IdComp
-			order by Count_femeas desc) as N)
-
-
+--n--
 
 
 
